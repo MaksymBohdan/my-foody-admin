@@ -6,7 +6,7 @@ class MenuGridContainer extends Component {
   state = {
     // loading: false,
     // error: null,
-    menuItems: null,
+    menuItems: [],
   };
 
   async componentDidMount() {
