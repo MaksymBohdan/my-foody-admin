@@ -19,7 +19,6 @@ const CategorySelector = ({ options, onChange, value }) => {
           </option>
         ))}
       </select>
-      <p>Current filter: {value}</p>
     </Fragment>
   );
 };

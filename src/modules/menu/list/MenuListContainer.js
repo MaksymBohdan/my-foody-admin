@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import queryString from 'query-string';
 import * as API from '../../../services/api';
 
-import MenuGridView from './MenuGridView';
+import MenuGridView from './MenuListView';
 import InputSearch from '../../../components/InputSearch/InputSearch';
 import CategorySelector from '../../../components/CategorySelector/CategorySelector';
 
@@ -12,7 +12,7 @@ import routes from '../../../configs/routes';
 const getCategoryFromProps = props =>
   queryString.parse(props.location.search).category;
 
-class MenuGridContainer extends Component {
+class MenuListContainer extends Component {
   state = {
     loading: false,
     error: null,
@@ -110,4 +110,4 @@ class MenuGridContainer extends Component {
   }
 }
 
-export default withRouter(MenuGridContainer);
+export default withRouter(MenuListContainer);

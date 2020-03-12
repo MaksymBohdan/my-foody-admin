@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuCard from '../MenuCard/MenuCard';
 import routes from '../../../configs/routes';
 
-const MenuGridView = ({ menuItems, ...props }) => (
+const MenuListView = ({ menuItems, ...props }) => (
   <ul>
     {menuItems.map(({ name, price, id, image }) => (
       <li key={id}>
@@ -13,11 +12,15 @@ const MenuGridView = ({ menuItems, ...props }) => (
             state: { from: props.location },
           }}
         >
-          <MenuCard name={name} price={price} id={id} image={image} />
+          <>
+            <p>Name: {name}</p>
+            <img src={image} alt={name} width={320} height={240} />
+            <p>Price: {price}</p>{' '}
+          </>
         </Link>
       </li>
     ))}
   </ul>
 );
 
-export default MenuGridView;
+export default MenuListView;
