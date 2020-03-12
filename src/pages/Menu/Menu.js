@@ -1,8 +1,8 @@
 import React from 'react';
-import MenuGridContainer from '../../modules/menu/MenuGrid/MenuGridContainer';
+import MenuListContainer from '../../modules/menu/list/MenuListContainer';
 
 const Menu = () => {
-  return <MenuGridContainer />;
+  return <MenuListContainer />;
 };
 
 export default Menu;
