@@ -1,113 +1,107 @@
-import React, { Component, Fragment } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import queryString from 'query-string';
-import * as API from '../../../services/api';
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import MenuGridView from './MenuListView';
-import InputSearch from '../../../components/InputSearch/InputSearch';
-import CategorySelector from '../../../components/CategorySelector/CategorySelector';
+import MenuListView from './MenuListView';
+import { fetchMenuList } from '../../../state/menu/actions';
+// import InputSearch from '../../../components/InputSearch/InputSearch';
+// import CategorySelector from '../../../components/CategorySelector/CategorySelector';
 
-import routes from '../../../configs/routes';
+// import * as API from '../../../services/api';
+// import { getCategoryFromProps } from '../../../utils/index';
+// state = {
+//   loading: false,
+//   error: null,
+//   menuItems: [],
+//   menuCategories: [],
+//   filterValue: '',
+// };
 
-const getCategoryFromProps = props =>
-  queryString.parse(props.location.search).category;
+const MenuGridContainer = () => {
+  const dispatch = useDispatch();
 
-class MenuListContainer extends Component {
-  state = {
-    loading: false,
-    error: null,
-    menuItems: [],
-    menuCategories: [],
-    filterValue: '',
-  };
+  // render() {
+  //   const { menuItems, filterValue, menuCategories } = this.state;
+  //   const filteredValue = this.handleFilterMenuItems(filterValue, menuItems);
+  //   const currentCategory = getCategoryFromProps(this.props);
+  useEffect(() => {
+    dispatch(fetchMenuList());
+  }, [dispatch]);
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const category = getCategoryFromProps(this.props);
+  return (
+    <>
+      <MenuListView menuItems={[]} />
+    </>
+  );
+};
+// }
 
-    this.handlePushToCategoryAll(category);
-    this.fetchCategoryAndMenuItem(category);
-  }
+export default withRouter(MenuGridContainer);
 
-  async componentDidUpdate(prevProps) {
-    const previousProps = getCategoryFromProps(prevProps);
-    const currentProps = getCategoryFromProps(this.props);
+/* <InputSearch
+filterValue={filterValue}
+onChange={this.handleFilterValue}
+/>
+<CategorySelector
+options={menuCategories}
+onChange={this.handleCategorySelector}
+value={currentCategory}
+/> */
 
-    if (currentProps === previousProps) return;
+// async componentDidMount() {
+//   this.setState({ loading: true });
+//   const category = getCategoryFromProps(this.props);
 
-    this.handlePushToCategoryAll(currentProps);
-    this.fetchCategoryAndMenuItem(currentProps);
-  }
+//   this.handlePushToCategoryAll(category);
+//   this.fetchCategoryAndMenuItem(category);
+// }
 
-  fetchCategoryAndMenuItem = category => {
-    Promise.all([API.getMenuItemsWithCategory(category), API.getCategories()])
-      .then(response => {
-        this.setState({
-          menuItems: response[0],
-          menuCategories: response[1],
-          loading: false,
-        });
-      })
-      .catch(error => this.setState({ error, loading: false }));
-  };
+// async componentDidUpdate(prevProps) {
+//   const previousProps = getCategoryFromProps(prevProps);
+//   const currentProps = getCategoryFromProps(this.props);
 
-  handleFilterMenuItems = (filterValue, menuItems) =>
-    menuItems.filter(item =>
-      item.name.toLowerCase().includes(filterValue.toLowerCase()),
-    );
+//   if (currentProps === previousProps) return;
 
-  handleFilterValue = event =>
-    this.setState({ filterValue: event.target.value });
+//   this.handlePushToCategoryAll(currentProps);
+//   this.fetchCategoryAndMenuItem(currentProps);
+// }
 
-  handleCategorySelector = category => {
-    const { history, location } = this.props;
+// fetchCategoryAndMenuItem = category => {
+//   Promise.all([API.getMenuItemsWithCategory(category), API.getCategories()])
+//     .then(response => {
+//       this.setState({
+//         menuItems: response[0],
+//         menuCategories: response[1],
+//         loading: false,
+//       });
+//     })
+//     .catch(error => this.setState({ error, loading: false }));
+// };
 
-    history.push({
-      pathname: location.pathname,
-      search: `category=${category}`,
-    });
-  };
+// handleFilterMenuItems = (filterValue, menuItems) =>
+//   menuItems.filter(item =>
+//     item.name.toLowerCase().includes(filterValue.toLowerCase()),
+//   );
 
-  handlePushToCategoryAll = category => {
-    const { history, location } = this.props;
+// handleFilterValue = event =>
+//   this.setState({ filterValue: event.target.value });
 
-    if (category) return;
+// handleCategorySelector = category => {
+//   const { history, location } = this.props;
 
-    history.push({
-      pathname: location.pathname,
-      search: `category=all`,
-    });
-  };
+//   history.push({
+//     pathname: location.pathname,
+//     search: `category=${category}`,
+//   });
+// };
 
-  render() {
-    const {
-      menuItems,
-      filterValue,
-      loading,
-      menuCategories,
-      error,
-    } = this.state;
-    const filteredValue = this.handleFilterMenuItems(filterValue, menuItems);
-    const currentCategory = getCategoryFromProps(this.props);
+// handlePushToCategoryAll = category => {
+//   const { history, location } = this.props;
 
-    return (
-      <Fragment>
-        {loading && <h1>Loading...</h1>}
-        {error && <h1>Error...</h1>}
-        <Link to={routes.MENU_ITEM_NEW}>Add new order</Link>
-        <InputSearch
-          filterValue={filterValue}
-          onChange={this.handleFilterValue}
-        />
-        <CategorySelector
-          options={menuCategories}
-          onChange={this.handleCategorySelector}
-          value={currentCategory}
-        />
-        <MenuGridView menuItems={filteredValue} {...this.props} />
-      </Fragment>
-    );
-  }
-}
+//   if (category) return;
 
-export default withRouter(MenuListContainer);
+//   history.push({
+//     pathname: location.pathname,
+//     search: `category=all`,
+//   });
+// };
