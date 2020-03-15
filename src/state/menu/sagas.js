@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
 import { getAllMenuItems } from '../../services/api';
-import { fetchMenuListSuccess, fetchMenuListError } from './actions';
+import actions from './actions';
 
 export function* fetchMenuList() {
   try {
     const menuAll = yield call(getAllMenuItems);
-    yield put(fetchMenuListSuccess(menuAll));
+    yield put(actions.fetchMenuListSuccess(menuAll));
   } catch (err) {
-    yield put(fetchMenuListError(err));
+    yield put(actions.fetchMenuListError(err));
   }
 }

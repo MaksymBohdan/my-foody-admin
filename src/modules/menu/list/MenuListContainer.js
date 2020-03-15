@@ -1,107 +1,72 @@
-import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+/* components */
 import MenuListView from './MenuListView';
-import { fetchMenuList } from '../../../state/menu/actions';
-// import InputSearch from '../../../components/InputSearch/InputSearch';
-// import CategorySelector from '../../../components/CategorySelector/CategorySelector';
+import Spinner from '../../../components/Spinner/Spinner';
+import ErrorBoundary from '../../../components/ErrorBoundary.js/ErrorBoundary';
+import CategorySelector from '../../../components/CategorySelector/CategorySelector';
+import InputSearch from '../../../components/InputSearch/InputSearch';
+/* others */
+import { menuActions, menuSelectors } from '../../../state/menu';
+import categories from '../../../configs/categories';
+import { getCategoryFromProps, getFilteredList } from '../../../utils';
 
-// import * as API from '../../../services/api';
-// import { getCategoryFromProps } from '../../../utils/index';
-// state = {
-//   loading: false,
-//   error: null,
-//   menuItems: [],
-//   menuCategories: [],
-//   filterValue: '',
-// };
-
-const MenuGridContainer = () => {
+const MenuGridContainer = ({ history, location }) => {
   const dispatch = useDispatch();
+  const list = useSelector(menuSelectors.menuList);
+  const isLoading = useSelector(menuSelectors.loading);
+  const error = useSelector(menuSelectors.error);
+  const [category, setCategory] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const filteredList = getFilteredList(list, searchValue, category);
 
-  // render() {
-  //   const { menuItems, filterValue, menuCategories } = this.state;
-  //   const filteredValue = this.handleFilterMenuItems(filterValue, menuItems);
-  //   const currentCategory = getCategoryFromProps(this.props);
+  /*
+   ** MENU LIST
+   */
   useEffect(() => {
-    dispatch(fetchMenuList());
+    dispatch(menuActions.fetchMenuList());
   }, [dispatch]);
 
+  /*
+   ** MANAGE CATEGORIES
+   */
+  useEffect(() => {
+    const categoryUrl = getCategoryFromProps(location);
+
+    if (!categoryUrl) {
+      setCategory('all');
+      return;
+    }
+    if (category !== categoryUrl) setCategory(categoryUrl);
+  }, [location, category]);
+
+  const changeCategory = currentCategory => {
+    history.push({
+      pathname: location.pathname,
+      search: `category=${currentCategory}`,
+    });
+  };
+
+  /*
+   ** MANAGE SEARCH
+   */
+  const changeSearch = e => {
+    setSearchValue(e.target.value);
+  };
+
   return (
-    <>
-      <MenuListView menuItems={[]} />
-    </>
+    <ErrorBoundary outerError={error}>
+      <Spinner isLoading={isLoading}>
+        <CategorySelector
+          options={categories}
+          onChange={changeCategory}
+          value={category}
+        />
+        <InputSearch filterValue={searchValue} onChange={changeSearch} />
+        <MenuListView menuItems={filteredList} />
+      </Spinner>
+    </ErrorBoundary>
   );
 };
-// }
 
-export default withRouter(MenuGridContainer);
-
-/* <InputSearch
-filterValue={filterValue}
-onChange={this.handleFilterValue}
-/>
-<CategorySelector
-options={menuCategories}
-onChange={this.handleCategorySelector}
-value={currentCategory}
-/> */
-
-// async componentDidMount() {
-//   this.setState({ loading: true });
-//   const category = getCategoryFromProps(this.props);
-
-//   this.handlePushToCategoryAll(category);
-//   this.fetchCategoryAndMenuItem(category);
-// }
-
-// async componentDidUpdate(prevProps) {
-//   const previousProps = getCategoryFromProps(prevProps);
-//   const currentProps = getCategoryFromProps(this.props);
-
-//   if (currentProps === previousProps) return;
-
-//   this.handlePushToCategoryAll(currentProps);
-//   this.fetchCategoryAndMenuItem(currentProps);
-// }
-
-// fetchCategoryAndMenuItem = category => {
-//   Promise.all([API.getMenuItemsWithCategory(category), API.getCategories()])
-//     .then(response => {
-//       this.setState({
-//         menuItems: response[0],
-//         menuCategories: response[1],
-//         loading: false,
-//       });
-//     })
-//     .catch(error => this.setState({ error, loading: false }));
-// };
-
-// handleFilterMenuItems = (filterValue, menuItems) =>
-//   menuItems.filter(item =>
-//     item.name.toLowerCase().includes(filterValue.toLowerCase()),
-//   );
-
-// handleFilterValue = event =>
-//   this.setState({ filterValue: event.target.value });
-
-// handleCategorySelector = category => {
-//   const { history, location } = this.props;
-
-//   history.push({
-//     pathname: location.pathname,
-//     search: `category=${category}`,
-//   });
-// };
-
-// handlePushToCategoryAll = category => {
-//   const { history, location } = this.props;
-
-//   if (category) return;
-
-//   history.push({
-//     pathname: location.pathname,
-//     search: `category=all`,
-//   });
-// };
+export default MenuGridContainer;
