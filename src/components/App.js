@@ -4,6 +4,7 @@ import AppHeader from './AppHeader/AppHeader';
 import Main from '../pages/Main/Main';
 import Menu from '../pages/Menu/Menu';
 import routes from '../configs/routes';
+import Item from '../modules/item/ItemContainer';
 
 const App = () => (
   <>
@@ -11,6 +12,7 @@ const App = () => (
     <Switch>
       <Route exact path={routes.MAIN} component={Main} />
       <Route exact path={routes.MENU} component={Menu} />
+      <Route path={routes.ITEM} component={Item} />
     </Switch>
   </>
 );
