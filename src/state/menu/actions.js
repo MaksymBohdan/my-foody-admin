@@ -1,19 +1,21 @@
-import {
-  FETCH_MENU_LIST_REQUEST,
-  FETCH_MENU_LIST_SUCCESS,
-  FETCH_MENU_LIST_ERROR,
-} from './types';
+import types from './types';
 
-export const fetchMenuList = () => ({
-  type: FETCH_MENU_LIST_REQUEST,
+const fetchMenuList = () => ({
+  type: types.FETCH_MENU_LIST_REQUEST,
 });
 
-export const fetchMenuListSuccess = list => ({
-  type: FETCH_MENU_LIST_SUCCESS,
+const fetchMenuListSuccess = list => ({
+  type: types.FETCH_MENU_LIST_SUCCESS,
   payload: list,
 });
 
-export const fetchMenuListError = err => ({
-  type: FETCH_MENU_LIST_ERROR,
+const fetchMenuListError = err => ({
+  type: types.FETCH_MENU_LIST_ERROR,
   payload: err,
 });
+
+export default {
+  fetchMenuList,
+  fetchMenuListSuccess,
+  fetchMenuListError,
+};

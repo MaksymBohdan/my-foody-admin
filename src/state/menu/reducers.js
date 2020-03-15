@@ -1,24 +1,20 @@
 import { combineReducers } from 'redux';
-import {
-  FETCH_MENU_LIST_SUCCESS,
-  FETCH_MENU_LIST_REQUEST,
-  FETCH_MENU_LIST_ERROR,
-} from './types';
+import types from './types';
 
 const list = (state = [], { type, payload }) => {
   switch (type) {
-    case FETCH_MENU_LIST_SUCCESS:
+    case types.FETCH_MENU_LIST_SUCCESS:
       return payload;
     default:
       return state;
   }
 };
 
-const error = (state = null, { type }) => {
+const error = (state = null, { type, payload }) => {
   switch (type) {
-    case FETCH_MENU_LIST_SUCCESS: {
-      return null;
-    }
+    case types.FETCH_MENU_LIST_ERROR:
+      return payload;
+
     default:
       return state;
   }
@@ -26,16 +22,14 @@ const error = (state = null, { type }) => {
 
 const loading = (state = false, { type }) => {
   switch (type) {
-    case FETCH_MENU_LIST_REQUEST:
+    case types.FETCH_MENU_LIST_REQUEST:
       return true;
-    case FETCH_MENU_LIST_SUCCESS:
-    case FETCH_MENU_LIST_ERROR:
+    case types.FETCH_MENU_LIST_SUCCESS:
+    case types.FETCH_MENU_LIST_ERROR:
       return false;
     default:
       return state;
   }
 };
 
-const menuListReducer = combineReducers({ list, error, loading });
-
-export { menuListReducer };
+export default combineReducers({ list, error, loading });
