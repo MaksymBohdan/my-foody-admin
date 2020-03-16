@@ -1,20 +1,41 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import AppHeader from './AppHeader/AppHeader';
-import Main from '../pages/Main/Main';
-import Menu from '../pages/Menu/Menu';
-import routes from '../configs/routes';
-import Item from '../modules/item/ItemContainer';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Layout } from 'antd';
+import Logo from './Logo/Logo';
+import Sider from './Sider/Sider';
+import Menu from './Menu/Menu';
+import Footer from './Footer/Footer';
+import Content from './Content/Content';
+import items from '../configs/nav-items';
 
-const App = () => (
-  <>
-    <AppHeader />
-    <Switch>
-      <Route exact path={routes.MAIN} component={Main} />
-      <Route exact path={routes.MENU} component={Menu} />
-      <Route path={routes.ITEM} component={Item} />
-    </Switch>
-  </>
-);
+const App = () => {
+  const [collapsed, setColapsed] = useState(false);
+
+  const onCollapse = status => {
+    setColapsed(status);
+  };
+
+  return (
+    <MainLayout>
+      <Sider collapsed={collapsed} onCollapse={onCollapse}>
+        <Logo />
+        <Menu items={items} />
+      </Sider>
+      <ContentLayout className="site-layout" collapsed={collapsed ? 1 : 0}>
+        <Content />
+        <Footer />
+      </ContentLayout>
+    </MainLayout>
+  );
+};
+
+const MainLayout = styled(Layout)`
+  min-height: 100vh;
+`;
+
+const ContentLayout = styled(Layout)`
+  margin-left: ${props => (props.collapsed ? '80px' : '200px')};
+  transition: margin-left 0.2s ease-out;
+`;
 
 export default App;
