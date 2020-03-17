@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Divider } from 'antd';
+
 /* components */
 import MenuListView from './MenuListView';
 import Spinner from '../../../components/Spinner/Spinner';
@@ -13,12 +15,17 @@ import { getCategoryFromProps, getFilteredList } from '../../../utils';
 
 const MenuGridContainer = ({ history, location }) => {
   const dispatch = useDispatch();
+
   const list = useSelector(menuSelectors.menuList);
   const isLoading = useSelector(menuSelectors.loading);
   const error = useSelector(menuSelectors.error);
+
   const [category, setCategory] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const filteredList = getFilteredList(list, searchValue, category);
+  const [step, setStep] = useState(5);
+
+  const isLoadable = step <= list.length;
+  const filteredList = getFilteredList(list, searchValue, category, step);
 
   /*
    ** MENU LIST
@@ -54,6 +61,11 @@ const MenuGridContainer = ({ history, location }) => {
     setSearchValue(e.target.value);
   };
 
+  /*
+   ** MANAGE LOAD
+   */
+  const changeStep = () => isLoadable && setStep(prev => prev + 5);
+
   return (
     <ErrorBoundary outerError={error}>
       <Spinner isLoading={isLoading}>
@@ -63,7 +75,12 @@ const MenuGridContainer = ({ history, location }) => {
           value={category}
         />
         <InputSearch filterValue={searchValue} onChange={changeSearch} />
-        <MenuListView menuItems={filteredList} />
+        <Divider />
+        <MenuListView
+          menuItems={filteredList}
+          changeStep={changeStep}
+          isLoadable={isLoadable}
+        />
       </Spinner>
     </ErrorBoundary>
   );
