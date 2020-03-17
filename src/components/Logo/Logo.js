@@ -1,9 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const Logo = () => (
-  <div className="logo">
+  <StyledLogo className="logo">
     <h1>Logo</h1>
-  </div>
+  </StyledLogo>
 );
+
+const StyledLogo = styled.div`
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+  text-align: center;
+`;
 
 export default Logo;
