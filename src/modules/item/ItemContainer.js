@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-/* others */
-import { itemActions, itemSelectors } from '../../state/item';
+/* components */
 import ErrorBoundary from '../../components/ErrorBoundary.js/ErrorBoundary';
 import Spinner from '../../components/Spinner/Spinner';
 import ItemView from './ItemView';
+/* others */
+import { itemActions, itemSelectors } from '../../state/item';
 
 const ItemContainer = ({ match }) => {
   const { id } = match.params;

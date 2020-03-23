@@ -120,6 +120,23 @@
         "Легкий соевый соус",
         "Кунжутное масло"
       ]
+    },
+    {
+      "name": "Kolia",
+      "category": "soup",
+      "description": "das",
+      "ingredients": "asd",
+      "image": "https://s2.eda.ru/StaticContent/Photos/150428090447/150505141508/p_O.jpg",
+      "id": 9
+    },
+    {
+      "name": "new soup",
+      "category": "soup",
+      "description": "Description",
+      "price": 1,
+      "ingredients": "some Ingredients",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
+      "id": 10
     }
   ]
 }
