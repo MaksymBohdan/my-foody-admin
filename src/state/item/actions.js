@@ -15,8 +15,25 @@ const fetchMenuItemError = err => ({
   payload: err,
 });
 
+const saveMenuItem = item => ({
+  type: types.SAVE_MENU_ITEM_REQUEST,
+  payload: item,
+});
+
+const saveMenuItemSuccess = () => ({
+  type: types.SAVE_MENU_ITEM_SUCCESS,
+});
+
+const saveMenuItemError = err => ({
+  type: types.SAVE_MENU_ITEM_ERROR,
+  payload: err,
+});
+
 export default {
   fetchMenuItem,
   fetchMenuItemSuccess,
   fetchMenuItemError,
+  saveMenuItem,
+  saveMenuItemSuccess,
+  saveMenuItemError,
 };

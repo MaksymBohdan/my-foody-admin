@@ -13,3 +13,9 @@ export const getMenuItem = async id => {
 
   return response.data;
 };
+
+export const saveMenuItem = async item => {
+  const response = await axios.post('/menu', item);
+
+  return response.data;
+};

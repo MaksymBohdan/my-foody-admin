@@ -17,3 +17,8 @@ export const getFilteredList = (list, search, currentCategory, step) =>
 
 export const cutText = (text, limit) =>
   text.length > limit ? `${text.slice(0, limit)}...` : text;
+
+export const numberFormatter = value =>
+  `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+export const numberParser = value => value.replace(/\$\s?|(,*)/g, '');
