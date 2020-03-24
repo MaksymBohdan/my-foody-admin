@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
+/* components */
 import Logo from './Logo/Logo';
 import Sider from './Sider/Sider';
 import Menu from './Menu/Menu';
 import Footer from './Footer/Footer';
 import Content from './Content/Content';
+/* others */
 import items from '../configs/nav-items';
 
-const App = () => {
-  const [collapsed, setColapsed] = useState(false);
+interface ContentProps {
+  readonly collapsed: boolean;
+}
 
-  const onCollapse = status => {
+const App: React.FC = () => {
+  const [collapsed, setColapsed] = useState<boolean>(false);
+
+  const onCollapse = (status: boolean): void => {
     setColapsed(status);
   };
 
@@ -21,7 +27,7 @@ const App = () => {
         <Logo />
         <Menu items={items} />
       </Sider>
-      <ContentLayout className="site-layout" collapsed={collapsed ? 1 : 0}>
+      <ContentLayout collapsed={collapsed}>
         <Content />
         <Footer />
       </ContentLayout>
@@ -33,7 +39,7 @@ const MainLayout = styled(Layout)`
   min-height: 100vh;
 `;
 
-const ContentLayout = styled(Layout)`
+const ContentLayout = styled(Layout)<ContentProps>`
   margin-left: ${props => (props.collapsed ? '80px' : '200px')};
   transition: margin-left 0.2s ease-out;
 `;
