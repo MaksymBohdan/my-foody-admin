@@ -1,6 +1,16 @@
 import React from 'react';
 
-const ItemView = ({ item }) => {
+interface ItemType {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  category: string;
+  ingredients: string[];
+}
+
+const ItemView: React.FC<{ item: ItemType }> = ({ item }) => {
   const { id, description, name, image } = item || {};
 
   return (

@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 /* components */
-import ErrorBoundary from '../../components/ErrorBoundary.js/ErrorBoundary';
-import Spinner from '../../components/Spinner/Spinner';
+import ErrorBoundary from '../../../components/ErrorBoundary.js/ErrorBoundary';
+import Spinner from '../../../components/Spinner/Spinner';
 import ItemView from './ItemView';
 /* others */
-import { itemActions, itemSelectors } from '../../state/item';
+import { itemActions, itemSelectors } from '../../../state/item';
 
-const ItemContainer = ({ match }) => {
+/* types */
+type TParams = { id: string };
+
+const ItemContainer: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { id } = match.params;
   const dispatch = useDispatch();
   const item = useSelector(itemSelectors.item);
