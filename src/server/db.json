@@ -137,6 +137,24 @@
       "ingredients": "some Ingredients",
       "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
       "id": 10
+    },
+    {
+      "name": "aasdasd",
+      "category": "soup",
+      "description": "asdas",
+      "price": 1,
+      "ingredients": "asdasd",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
+      "id": 11
+    },
+    {
+      "name": "Nataliia Rudenko",
+      "category": "all",
+      "description": "das",
+      "price": 1,
+      "ingredients": "dad",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
+      "id": 12
     }
   ]
 }

@@ -4,8 +4,8 @@ import { Layout } from 'antd';
 /* components */
 import Main from '../../pages/Main/Main';
 import Menues from '../../pages/Menu/Menu';
-import Item from '../../modules/item/ItemContainer';
-import ItemNew from '../../modules/item/itemNew/ItemNew';
+import Item from '../../modules/item/item/ItemContainer';
+import ItemNew from '../../modules/item/new/ItemNew';
 /* others */
 import routes from '../../configs/routes';
 
