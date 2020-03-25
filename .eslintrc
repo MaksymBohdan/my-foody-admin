@@ -3,20 +3,14 @@
     "eslint:recommended",
     "airbnb",
     "plugin:import/errors",
-    "plugin:import/typescript",
-
-    "plugin:import/warnings",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "prettier",
     "plugin:prettier/recommended",
-    "prettier/react",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "prettier/react"
   ],
   "plugins": ["react", "import", "prettier", "jsx-a11y", "react-hooks"],
-  "parser": "babel-eslint, @typescript-eslint/parser",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -42,28 +36,7 @@
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/no-onchange": 0,
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
-    "import/no-extraneous-dependencies": 0,
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "mjs": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": 0
   }
 }
