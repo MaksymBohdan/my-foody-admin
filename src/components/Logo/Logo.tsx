@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Logo = () => (
+const Logo: React.FC<{}> = () => (
   <StyledLogo className="logo">
     <h1>Logo</h1>
   </StyledLogo>

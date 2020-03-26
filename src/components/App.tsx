@@ -18,7 +18,7 @@ interface IContentLayout {
 const App: React.FC = () => {
   const [collapsed, setColapsed] = useState<boolean>(false);
 
-  const onCollapse = (status: boolean): void => {
+  const onCollapse = (status: boolean) => {
     setColapsed(status);
   };
 

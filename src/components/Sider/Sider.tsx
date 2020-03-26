@@ -1,7 +1,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 
-const Sider = ({ children, collapsed, onCollapse }) => (
+interface ISider {
+  children: React.ReactNode;
+  collapsed: boolean;
+  onCollapse: (status: boolean) => void;
+}
+
+const Sider: React.FC<ISider> = ({ children, collapsed, onCollapse }) => (
   <Layout.Sider
     collapsible
     collapsed={collapsed}

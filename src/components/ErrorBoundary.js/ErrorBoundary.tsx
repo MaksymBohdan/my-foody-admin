@@ -1,11 +1,20 @@
 import React from 'react';
 
-export default class ErrorBoundary extends React.Component {
+interface MyProps {
+  outerError: boolean;
+  children: React.ReactNode;
+}
+
+interface MyState {
+  hasError: boolean;
+}
+
+export default class ErrorBoundary extends React.Component<MyProps, MyState> {
   state = {
     hasError: false,
   };
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): Partial<MyState> | null {
     return { hasError: true };
   }
 
