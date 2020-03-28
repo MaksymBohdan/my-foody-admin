@@ -120,6 +120,24 @@
         "Легкий соевый соус",
         "Кунжутное масло"
       ]
+    },
+    {
+      "name": "EEE",
+      "category": "soup",
+      "description": "asd",
+      "price": 1,
+      "ingredients": "asd",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
+      "id": 9
+    },
+    {
+      "name": "aaa",
+      "category": "soup",
+      "description": "asd",
+      "price": 1,
+      "ingredients": "asd",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
+      "id": 10
     }
   ]
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface MyProps {
-  outerError: boolean;
+  outerError: boolean | null;
   children: React.ReactNode;
 }
 

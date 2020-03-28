@@ -1,6 +1,7 @@
 import React from 'react';
 import { IMenuItem } from '../../../interfaces';
 
+
 const ItemView: React.FC<{ item: IMenuItem }> = ({ item }) => {
   const { id, description, name, image } = item || {};
 

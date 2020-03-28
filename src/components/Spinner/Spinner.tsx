@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ISpinner {
-  isLoading: boolean;
+  isLoading: boolean ;
   children?: React.ReactNode;
 }
 
