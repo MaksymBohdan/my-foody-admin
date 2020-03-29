@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import menuTypes from './menu/types';
+import * as menuTypes from './menu/types';
 import * as itemTypes from './item/types';
 import { fetchMenuList } from './menu/sagas';
 import { fetchMenuItem, addMenuItem } from './item/sagas';

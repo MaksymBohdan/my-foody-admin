@@ -1,5 +1,5 @@
 import * as types from './types';
-import { IMenuItem, IMenuItemForm } from './../../interfaces/index';
+import { IMenuItem, IMenuItemForm, ErrorType } from './../../interfaces/index';
 
 const fetchMenuItem = (id: number): types.MenuItemActionTypes => ({
   type: types.FETCH_MENU_ITEM_REQUEST,
@@ -11,7 +11,7 @@ const fetchMenuItemSuccess = (item: IMenuItem): types.MenuItemActionTypes => ({
   payload: item,
 });
 
-const fetchMenuItemError = (err: boolean): types.MenuItemActionTypes => ({
+const fetchMenuItemError = (err: ErrorType): types.MenuItemActionTypes => ({
   type: types.FETCH_MENU_ITEM_ERROR,
   payload: err,
 });
@@ -25,7 +25,7 @@ const saveMenuItemSuccess = (): types.MenuItemActionTypes => ({
   type: types.SAVE_MENU_ITEM_SUCCESS,
 });
 
-const saveMenuItemError = (err: boolean): types.MenuItemActionTypes => ({
+const saveMenuItemError = (err: ErrorType): types.MenuItemActionTypes => ({
   type: types.SAVE_MENU_ITEM_ERROR,
   payload: err,
 });
