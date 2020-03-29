@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
 import * as types from './types';
-import { MenuItemActionTypes, ErrorType, StateType } from './types';
-import { IMenuItem } from './../../interfaces/index';
+import { IMenuItem, ErrorType } from './../../interfaces';
 
 /* item */
 const item = (
   state: IMenuItem = {} as IMenuItem,
-  action: MenuItemActionTypes,
+  action: types.MenuItemActionTypes,
 ): IMenuItem => {
   switch (action.type) {
     case types.FETCH_MENU_ITEM_SUCCESS: {
@@ -20,7 +19,7 @@ const item = (
 /* error */
 const error = (
   state: ErrorType = null,
-  action: MenuItemActionTypes,
+  action: types.MenuItemActionTypes,
 ): ErrorType => {
   switch (action.type) {
     case types.FETCH_MENU_ITEM_ERROR:
@@ -33,19 +32,9 @@ const error = (
 };
 
 /* loading */
-type loadingActionType = {
-  type:
-    | typeof types.FETCH_MENU_ITEM_REQUEST
-    | typeof types.FETCH_MENU_ITEM_SUCCESS
-    | typeof types.FETCH_MENU_ITEM_ERROR
-    | typeof types.SAVE_MENU_ITEM_REQUEST
-    | typeof types.SAVE_MENU_ITEM_ERROR
-    | typeof types.SAVE_MENU_ITEM_SUCCESS;
-};
-
 const loading = (
   state: boolean = false,
-  { type }: loadingActionType,
+  { type }: types.MenuItemActionTypes,
 ): boolean => {
   switch (type) {
     case types.FETCH_MENU_ITEM_REQUEST:
@@ -61,7 +50,7 @@ const loading = (
   }
 };
 
-export default combineReducers<StateType, MenuItemActionTypes>({
+export default combineReducers<types.StateType, types.MenuItemActionTypes>({
   item,
   error,
   loading,
