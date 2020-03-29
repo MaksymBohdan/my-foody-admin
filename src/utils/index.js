@@ -3,7 +3,7 @@ import queryString from 'query-string';
 export const getCategoryFromProps = location =>
   queryString.parse(location.search).category;
 
-export const getFilteredList = (list, search, currentCategory, step) =>
+export const getFilteredList = (list = [], search, currentCategory, step) =>
   currentCategory === 'all'
     ? list
         .filter(({ name }) => name.toLowerCase().includes(search.toLowerCase()))

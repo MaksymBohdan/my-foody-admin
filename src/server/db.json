@@ -122,39 +122,22 @@
       ]
     },
     {
-      "name": "Kolia",
+      "name": "EEE",
       "category": "soup",
-      "description": "das",
+      "description": "asd",
+      "price": 1,
       "ingredients": "asd",
-      "image": "https://s2.eda.ru/StaticContent/Photos/150428090447/150505141508/p_O.jpg",
+      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
       "id": 9
     },
     {
-      "name": "new soup",
+      "name": "aaa",
       "category": "soup",
-      "description": "Description",
+      "description": "asd",
       "price": 1,
-      "ingredients": "some Ingredients",
+      "ingredients": "asd",
       "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
       "id": 10
-    },
-    {
-      "name": "aasdasd",
-      "category": "soup",
-      "description": "asdas",
-      "price": 1,
-      "ingredients": "asdasd",
-      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
-      "id": 11
-    },
-    {
-      "name": "Nataliia Rudenko",
-      "category": "all",
-      "description": "das",
-      "price": 1,
-      "ingredients": "dad",
-      "image": "https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg",
-      "id": 12
     }
   ]
 }

@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 /* components */
 import MenuListView from './MenuListView';
-import Spinner from '../../../components/Spinner/Spinner';
-import ErrorBoundary from '../../../components/ErrorBoundary.js/ErrorBoundary';
+import Spinner from '../../components/Spinner/Spinner';
+import ErrorBoundary from '../../components/ErrorBoundary.js/ErrorBoundary';
 /* others */
-import { menuActions, menuSelectors } from '../../../state/menu';
-import { getCategoryFromProps, getFilteredList } from '../../../utils';
+import { menuActions, menuSelectors } from '../../state/menu';
+import { getCategoryFromProps, getFilteredList } from '../../utils';
+import { IMenuItem } from '../../interfaces';
 
-const MenuGridContainer = ({ history, location }) => {
+const MenuGridContainer: React.FC<RouteComponentProps> = ({
+  history,
+  location,
+}) => {
   const dispatch = useDispatch();
 
   const list = useSelector(menuSelectors.menuList);
   const isLoading = useSelector(menuSelectors.loading);
   const error = useSelector(menuSelectors.error);
 
-  const [category, setCategory] = useState('');
-  const [searchValue, setSearchValue] = useState('');
-  const [step, setStep] = useState(5);
+  const [category, setCategory] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [step, setStep] = useState<number>(5);
 
-  const isLoadable = step <= list.length;
-  const filteredList = getFilteredList(list, searchValue, category, step);
+  const isLoadable: boolean = step <= list.length;
+  const filteredList: IMenuItem[] = getFilteredList(
+    list,
+    searchValue,
+    category,
+    step,
+  );
 
   /*
    ** MENU LIST
@@ -33,7 +43,7 @@ const MenuGridContainer = ({ history, location }) => {
    ** MANAGE CATEGORIES
    */
   useEffect(() => {
-    const categoryUrl = getCategoryFromProps(location);
+    const categoryUrl: any = getCategoryFromProps(location);
 
     if (!categoryUrl) {
       setCategory('all');
@@ -42,7 +52,7 @@ const MenuGridContainer = ({ history, location }) => {
     if (category !== categoryUrl) setCategory(categoryUrl);
   }, [location, category]);
 
-  const changeCategory = currentCategory => {
+  const changeCategory = (currentCategory: string) => {
     history.push({
       pathname: location.pathname,
       search: `category=${currentCategory}`,
@@ -52,9 +62,8 @@ const MenuGridContainer = ({ history, location }) => {
   /*
    ** MANAGE SEARCH
    */
-  const changeSearch = e => {
+  const changeSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchValue(e.target.value);
-  };
 
   /*
    ** MANAGE LOAD
@@ -65,13 +74,14 @@ const MenuGridContainer = ({ history, location }) => {
     <ErrorBoundary outerError={error}>
       <Spinner isLoading={isLoading}>
         <MenuListView
-          menuItems={filteredList}
           changeStep={changeStep}
           isLoadable={isLoadable}
           changeCategory={changeCategory}
           changeSearch={changeSearch}
           category={category}
           searchValue={searchValue}
+          menuItems={filteredList}
+          location={location}
         />
       </Spinner>
     </ErrorBoundary>

@@ -1,25 +1,38 @@
 import React from 'react';
 import { List, Avatar, Button, Divider, Row, Col } from 'antd';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, RouteProps } from 'react-router-dom';
 /* components */
-import CategorySelector from '../../../components/CategorySelector/CategorySelector';
-import InputSearch from '../../../components/InputSearch/InputSearch';
-import RedirectButton from '../../../components/RedirectButton/RedirectButton';
+import CategorySelector from '../../components/CategorySelector/CategorySelector';
+import InputSearch from '../../components/InputSearch/InputSearch';
+import RedirectButton from '../../components/RedirectButton/RedirectButton';
 /* others */
-import routes from '../../../configs/routes';
-import { cutText } from '../../../utils';
-import categories from '../../../configs/categories';
+import routes from '../../configs/routes';
+import { cutText } from '../../utils';
+import categories from '../../configs/categories';
+import { IMenuItem } from '../../interfaces';
 
-const MenuListView = ({
+// types
+interface MenuListViewProps {
+  menuItems: IMenuItem[];
+  changeStep: () => void;
+  isLoadable: boolean;
+  changeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeCategory: (category: string) => void;
+  category: string;
+  searchValue: string;
+  location: RouteProps['location'];
+}
+
+const MenuListView: React.FC<MenuListViewProps> = ({
   menuItems,
   changeStep,
   isLoadable,
-  location,
   changeSearch,
   changeCategory,
   category,
   searchValue,
+  location,
 }) => {
   const loadMore = isLoadable ? (
     <LoadMoreSection>
@@ -27,7 +40,7 @@ const MenuListView = ({
     </LoadMoreSection>
   ) : null;
 
-  const linkTo = (path, param) => ({
+  const linkTo = (path: string, param: number) => ({
     pathname: `${path}/${param}`,
     state: { from: location },
   });

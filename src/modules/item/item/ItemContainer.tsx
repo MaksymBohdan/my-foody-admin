@@ -19,7 +19,7 @@ const ItemContainer: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const error = useSelector(itemSelectors.error);
 
   useEffect(() => {
-    dispatch(itemActions.fetchMenuItem(id));
+    dispatch(itemActions.fetchMenuItem(+id));
   }, [dispatch, id]);
 
   return (

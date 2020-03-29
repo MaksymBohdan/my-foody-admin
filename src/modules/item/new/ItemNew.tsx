@@ -7,23 +7,22 @@ import categories from '../../../configs/categories';
 import { required } from '../../../configs/formItemRules';
 import { itemActions } from '../../../state/item';
 import { numberFormatter, numberParser } from '../../../utils';
-import { FormProps } from 'antd/lib/form/Form';
+import { IMenuItemForm } from '../../../interfaces';
 
 const layout = { labelCol: { span: 8 }, wrapperCol: { span: 8 } };
 const tailLayout = { wrapperCol: { offset: 8, span: 16 } };
 const initialValues = { price: 1 };
+const image =
+  'https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg';
 
 const ItemNew: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
-  const onFinish = (formValues: FormProps) => {
-    const item = {
-      ...formValues,
-      image:
-        'https://cache.desktopnexus.com/thumbseg/215/215890-bigthumbnail.jpg',
-    };
+  // bug with onFinish???
+  const onFinish = (formValues: any) => {
+    const item: IMenuItemForm = { ...formValues, image };
 
-    dispatch(itemActions.saveMenuItem({ item, history }));
+    dispatch(itemActions.saveMenuItem(item));
   };
 
   return (
@@ -40,7 +39,7 @@ const ItemNew: React.FC<RouteComponentProps> = ({ history }) => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item label="Desciption" name="description" rules={[required]}>
+      <Form.Item label="Description" name="description" rules={[required]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item label="Price" name="price" rules={[required]}>

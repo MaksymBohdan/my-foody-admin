@@ -1,15 +1,25 @@
 import React, { Fragment } from 'react';
 
-const styles = {
-  select: {
-    fontSize: 16,
-  },
+type CategoryType = {
+  id: number;
+  name: string;
 };
-const CategorySelector = ({ options, onChange, value }) => {
+
+interface ICategorySelector {
+  options: CategoryType[];
+  onChange: (category: string) => void;
+  value: string;
+}
+
+const CategorySelector: React.FC<ICategorySelector> = ({
+  options,
+  onChange,
+  value,
+}) => {
   return (
     <Fragment>
       <select
-        style={styles.select}
+        style={{ fontSize: 16 }}
         onChange={e => onChange(e.target.value)}
         value={value}
       >
